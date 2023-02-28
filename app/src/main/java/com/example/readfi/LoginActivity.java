@@ -22,12 +22,20 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         binding.btnToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
