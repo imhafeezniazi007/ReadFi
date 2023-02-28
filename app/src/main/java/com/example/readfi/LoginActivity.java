@@ -42,36 +42,35 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
 
-//        auth = FirebaseAuth.getInstance();
-//        if (auth.getCurrentUser() != null) {
-//            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestEmail()
-//                .build();
-//
-//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-//
-//        // Check for existing Google Sign In account, if the user is already signed in
-//// the GoogleSignInAccount will be non-null.
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//
-////    if (account!=null)
-////    {
-////        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-////    }
-////
-//
-//        binding.btnGoogleauthentication.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-//                startActivityForResult(signInIntent, RC_SIGN_IN);
-//            }
-//        });
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        // Check for existing Google Sign In account, if the user is already signed in
+// the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (account != null) {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        }
+
+
+        binding.btnGoogleauthentication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
         binding.btnToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,55 +108,56 @@ public class LoginActivity extends AppCompatActivity {
                 //      startActivity(i);
             }
         });
-
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-//        if (requestCode == RC_SIGN_IN) {
-//            // The Task returned from this call is always completed, no need to attach
-//            // a listener.
-//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//            handleSignInResult(task);
-//        }
-//    }
-//
-//    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-//        try {
-//            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-//            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-//            if (acct != null) {
-//                String personName = acct.getDisplayName();
-//                String personGivenName = acct.getGivenName();
-//                String personFamilyName = acct.getFamilyName();
-//                String personEmail = acct.getEmail();
-//                String personId = acct.getId();
-//                Uri personPhoto = acct.getPhotoUrl();
-//            }
-//
-//            //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-//        } catch (ApiException e) {
-//            // The ApiException status code indicates the detailed failure reason.
-//            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-//        }
-//    }
-
-//
-//        private boolean validateInput (String username, String password){
-//            if (TextUtils.isEmpty(username)) {
-//                binding.edittextUsername.setError("Username cannot be empty");
-//                return false;
-//            }
-//
-//            if (TextUtils.isEmpty(password)) {
-//                binding.edittextPassword.setError("Password cannot be empty");
-//                return false;
-//            }
-//
-//            return true;
-//        }
     }
-}
+
+
+        @Override
+        public void onActivityResult ( int requestCode, int resultCode, Intent data){
+            super.onActivityResult(requestCode, resultCode, data);
+
+            // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+            if (requestCode == RC_SIGN_IN) {
+                // The Task returned from this call is always completed, no need to attach
+                // a listener.
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                handleSignInResult(task);
+            }
+        }
+
+        private void handleSignInResult (Task < GoogleSignInAccount > completedTask) {
+            try {
+                GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+                if (acct != null) {
+                    String personName = acct.getDisplayName();
+                    String personGivenName = acct.getGivenName();
+                    String personFamilyName = acct.getFamilyName();
+                    String personEmail = acct.getEmail();
+                    String personId = acct.getId();
+                    Uri personPhoto = acct.getPhotoUrl();
+                }
+
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            } catch (ApiException e) {
+                // The ApiException status code indicates the detailed failure reason.
+                // Please refer to the GoogleSignInStatusCodes class reference for more information.
+                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            }
+        }
+
+
+        private boolean validateInput (String username, String password){
+            if (TextUtils.isEmpty(username)) {
+                binding.edittextUsername.setError("Username cannot be empty");
+                return false;
+            }
+
+            if (TextUtils.isEmpty(password)) {
+                binding.edittextPassword.setError("Password cannot be empty");
+                return false;
+            }
+
+            return true;
+        }
+    }
+
