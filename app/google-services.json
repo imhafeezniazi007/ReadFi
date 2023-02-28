@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "379082431314",
-    "project_id": "readfi-972de",
-    "storage_bucket": "readfi-972de.appspot.com"
+    "project_number": "659007631631",
+    "project_id": "readfi-de1e9",
+    "storage_bucket": "readfi-de1e9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:379082431314:android:ef163e2d5359c9782af88b",
+        "mobilesdk_app_id": "1:659007631631:android:b6353380a3ff77de020e7a",
         "android_client_info": {
           "package_name": "com.example.readfi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "379082431314-fid1jbbp3ja80fi9so51eehave7ar25t.apps.googleusercontent.com",
+          "client_id": "659007631631-5vsr83pn15b63j3h7ltvpgqoqblvrt2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.readfi",
+            "certificate_hash": "887225003ea19aeae228b3ecf2e883a41508cc99"
+          }
+        },
+        {
+          "client_id": "659007631631-iplgrg3aj39cf6aavlf0bl84r1hqvs01.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAZxYFVNHoixkzODOEvlJ2KArC-RfogCRA"
+          "current_key": "AIzaSyBkDUBmt_zXOGtgra5P572So0mdxwT4z4E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "379082431314-fid1jbbp3ja80fi9so51eehave7ar25t.apps.googleusercontent.com",
+              "client_id": "659007631631-iplgrg3aj39cf6aavlf0bl84r1hqvs01.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

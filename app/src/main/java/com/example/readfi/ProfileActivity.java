@@ -23,6 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     ActivityProfileBinding binding;
     GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

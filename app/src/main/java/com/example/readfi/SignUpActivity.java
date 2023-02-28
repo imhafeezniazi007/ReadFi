@@ -1,5 +1,8 @@
 package com.example.readfi;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -8,16 +11,32 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.readfi.databinding.ActivitySignUpBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
     ActivitySignUpBinding binding;
     ProgressDialog progressBar;
+    FirebaseAuth mAuth;
+    FirebaseFirestore firebaseFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +44,54 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                progressBar = new ProgressDialog(SignUpActivity.this);
+                progressBar.setMessage("Creating Account...");
+                progressBar.setCancelable(false);
+                progressBar.show();
+                String userName, email, password;
+                userName = binding.edittextRegisterUsername.getText().toString();
+                email = binding.edittextRegisterEmail.getText().toString();
+                password = binding.edittextRegisterPassword.getText().toString();
+
+                mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        Toast.makeText(SignUpActivity.this, "Account created...", Toast.LENGTH_SHORT).show();
+                        DocumentReference documentReference = firebaseFirestore.collection("Users")
+                                .document(firebaseUser.getUid());
+                        Map<String, Object> userInfo = new HashMap<>();
+                        userInfo.put("username", userName);
+                        userInfo.put("email", email);
+                        userInfo.put("Username", userName);
+
+                        userInfo.put("isUser", "1");
+
+                        documentReference.set(userInfo);
+                        progressBar.dismiss();
+                        startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressBar.dismiss();
+                        Toast.makeText(SignUpActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        Log.e("msg",e.toString() );
+                    }
+                });
+            }
+        });
+
+
 
         binding.btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,91 +102,15 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String username, email, password, confirmpassword;
-                username = String.valueOf(binding.edittextRegisterUsername.getText());
-                email = String.valueOf(binding.edittextRegisterEmail.getText());
-                password = String.valueOf(binding.edittextRegisterPassword.getText());
-                confirmpassword = String.valueOf(binding.edittextRegisterConfirmPassword.getText());
-
-
-                    if (!username.equals("") && !email.equals("") && !password.equals("")) {
-
-//                        progressBar.show();
-//                        progressBar.setMessage("Creating your account...");
-//                        progressBar.setCancelable(false);
-
-                        Handler handler = new Handler(Looper.getMainLooper());
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                //Starting Write and Read data with URL
-                                //Creating array for parameters
-                                String[] field = new String[3];
-                                field[0] = "username";
-                                field[1] = "email";
-                                field[2] = "password";
-                                //Creating array for data
-                                String[] data = new String[3];
-                                data[0] = username;
-                                data[1] = email;
-                                data[2] = password;
-                                //write your own url while uploading the app in place of 192.168.100.8
-                                //this ip address is just for debugging purpose!!!
-                                PutData putData = new PutData("http://192.168.100.8/ReadFi/signup.php", "POST", field, data);
-                                if (putData.startPut()) {
-                                    if (putData.onComplete()) {
-//                                        progressBar.dismiss();
-                                        String result = putData.getResult();
-                                        if (result.equals("Sign Up Success"))
-                                        {
-                                            Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                        else {
-                                            Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    }
-                                }
-                                //End Write and Read data with URL
-                            }
-                        });
-                    } else {
-                        validateInput(username, password, confirmpassword, email);
-                    }
-                }
-
-        });
     }
 
 
-    private boolean validateInput(String username, String password, String confirmpassword, String email) {
-        if (TextUtils.isEmpty(username)) {
-            binding.edittextRegisterUsername.setError("Username cannot be empty");
-            return false;
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
         }
-
-        if (TextUtils.isEmpty(password)) {
-            binding.edittextRegisterPassword.setError("Password cannot be empty");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(email)) {
-            binding.edittextRegisterEmail.setError("Email cannot be empty");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(confirmpassword)) {
-            binding.edittextRegisterConfirmPassword.setError("Password cannot be empty");
-            return false;
-        }
-
-        return true;
     }
 }
