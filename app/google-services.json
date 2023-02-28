@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "379082431314",
+    "project_id": "readfi-972de",
+    "storage_bucket": "readfi-972de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379082431314:android:ef163e2d5359c9782af88b",
+        "android_client_info": {
+          "package_name": "com.example.readfi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379082431314-fid1jbbp3ja80fi9so51eehave7ar25t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZxYFVNHoixkzODOEvlJ2KArC-RfogCRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379082431314-fid1jbbp3ja80fi9so51eehave7ar25t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
