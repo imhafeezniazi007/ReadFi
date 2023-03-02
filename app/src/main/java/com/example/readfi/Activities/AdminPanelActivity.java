@@ -12,6 +12,7 @@ import android.view.View;
 import com.example.readfi.Models.AdminModel;
 import com.example.readfi.databinding.ActivityAdminPanelBinding;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.UUID;
@@ -37,6 +38,14 @@ public class AdminPanelActivity extends AppCompatActivity {
             }
         });
 
+        binding.btnLogoutAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(AdminPanelActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
         binding.btnAdminPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

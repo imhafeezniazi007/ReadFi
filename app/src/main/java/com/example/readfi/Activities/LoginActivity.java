@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,9 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
-                                progressBar.dismiss();
-                                Toast.makeText(LoginActivity.this, "You're logged in...", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                checkUserAccessLevel(authResult.getUser().getUid());
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -90,6 +90,34 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void checkUserAccessLevel(String uid) {
+        DocumentReference documentReference = firebaseFirestore
+                .collection("Users").document(uid);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.getString("isAdmin") != null){
+                    progressBar.dismiss();
+                    Toast.makeText(LoginActivity.this, "You're logged in...", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, AdminPanelActivity.class));
+                    finish();
+                }
+                else if (documentSnapshot.getString("isUser") != null){
+                    progressBar.dismiss();
+                    Toast.makeText(LoginActivity.this, "You're logged in...", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    finish();
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+    }
 
     private boolean validateInput (String username, String password){
         if (TextUtils.isEmpty(username)) {
