@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ReadFi"
 include ':app'
-include ':readfiadmin'

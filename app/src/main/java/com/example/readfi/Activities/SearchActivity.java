@@ -1,4 +1,4 @@
-package com.example.readfi;
+package com.example.readfi.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

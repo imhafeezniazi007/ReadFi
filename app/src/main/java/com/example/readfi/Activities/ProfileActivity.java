@@ -1,6 +1,5 @@
-package com.example.readfi;
+package com.example.readfi.Activities;
 
-import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.readfi.databinding.ActivityLoginBinding;
 import com.example.readfi.databinding.ActivityProfileBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -18,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -61,13 +59,20 @@ public class ProfileActivity extends AppCompatActivity {
 
 
      private void signout() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
-                        finish();
-                    }
-                });
-                }
+
+         FirebaseAuth.getInstance().signOut();
+         startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+         finish();
+
+         if (mGoogleSignInClient != null) {
+             mGoogleSignInClient.signOut()
+                     .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                         @Override
+                         public void onComplete(@NonNull Task<Void> task) {
+                             startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+                             finish();
+                         }
+                     });
+         }
+     }
 }

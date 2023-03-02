@@ -1,35 +1,29 @@
-package com.example.readfi;
-
-import static android.content.ContentValues.TAG;
+package com.example.readfi.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.readfi.databinding.ActivityLoginBinding;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
     FirebaseAuth mAuth;
+    FirebaseFirestore firebaseFirestore;
+    ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +32,34 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
-        String email, password;
-        email = binding.edittextUsername.getText().toString();
-        password = binding.edittextPassword.getText().toString();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
-//        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mAuth.signInWithEmailAndPassword(email, password)
-//                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    FirebaseUser user = mAuth.getCurrentUser();
-//                                    updateUI(user);
-//                                } else {
-//                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-//                                            Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-//            }
-//        });
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("TAG", "msg" + email);
+                progressBar = new ProgressDialog(LoginActivity.this);
+                progressBar.setMessage("Logging in...");
+                progressBar.setCancelable(false);
+                progressBar.show();
+                mAuth.signInWithEmailAndPassword(binding.edittextUsername.getText().toString(), binding.edittextPassword.getText().toString())
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                progressBar.dismiss();
+                                Toast.makeText(LoginActivity.this, "You're logged in...", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressBar.dismiss();
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
 
 
         binding.btnGoogleauthentication.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +86,10 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
         }
     }
+
 
     private boolean validateInput (String username, String password){
         if (TextUtils.isEmpty(username)) {

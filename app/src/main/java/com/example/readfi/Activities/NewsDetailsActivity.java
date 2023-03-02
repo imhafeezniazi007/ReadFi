@@ -1,8 +1,10 @@
-package com.example.readfi;
+package com.example.readfi.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.readfi.R;
 
 public class NewsDetailsActivity extends AppCompatActivity {
 
