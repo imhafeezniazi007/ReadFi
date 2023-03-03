@@ -44,7 +44,6 @@
         app:cardBackgroundColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.114">
@@ -54,11 +53,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Can't fetch the data..."
-            android:textColor="#FFFFFF"
             android:ellipsize="end"
             android:maxLines="1"
             android:minLines="1"
+            android:text="Can't fetch the data..."
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
@@ -87,19 +86,41 @@
             android:foregroundGravity="center"
             app:srcCompat="@drawable/placeholder" />
 
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:foreground="@drawable/rectangle_card_view"
+        app:cardBackgroundColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.0">
+
         <TextView
             android:id="@+id/newsDetailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
             android:layout_margin="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:padding="8dp"
             android:text="Can't fetch the data..."
             android:textColor="#FFFFFF"
-            android:layout_gravity="bottom|center"
-            android:textSize="16sp" />
-
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.cardview.widget.CardView>
 
 
