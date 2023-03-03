@@ -64,10 +64,10 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_margin="8dp"
         android:foreground="@drawable/rectangle_card_view"
         android:padding="8dp"
         app:cardBackgroundColor="@color/black"
@@ -83,17 +83,23 @@
             android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
             app:srcCompat="@drawable/placeholder" />
 
         <TextView
             android:id="@+id/newsDetailsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:gravity="end"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Can't fetch the data..."
             android:textColor="#FFFFFF"
+            android:layout_gravity="bottom|center"
             android:textSize="16sp" />
+
     </androidx.cardview.widget.CardView>
 
 

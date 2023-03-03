@@ -47,16 +47,19 @@ public class SignUpActivity extends AppCompatActivity {
                 progressBar.setMessage("Creating Account...");
                 progressBar.setCancelable(false);
                 progressBar.show();
-                String userName, email, password;
+                String userName, email, password, verifyPassword;
                 userName = binding.edittextRegisterUsername.getText().toString();
                 email = binding.edittextRegisterEmail.getText().toString();
                 password = binding.edittextRegisterPassword.getText().toString();
+                verifyPassword = binding.edittextRegisterConfirmPassword.getText().toString();
+
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
                         Toast.makeText(SignUpActivity.this, "Account created...", Toast.LENGTH_SHORT).show();
+                        assert firebaseUser != null;
                         DocumentReference documentReference = firebaseFirestore.collection("Users")
                                 .document(firebaseUser.getUid());
                         Map<String, Object> userInfo = new HashMap<>();
@@ -66,10 +69,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                         userInfo.put("isUser", "1");
 
-                        documentReference.set(userInfo);
-                        progressBar.dismiss();
-                        startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
-                        finish();
+                        if (password.equals(verifyPassword)) {
+                            documentReference.set(userInfo);
+                            progressBar.dismiss();
+                            startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
+                            finish();
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

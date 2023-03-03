@@ -6,6 +6,16 @@ plugins {
 android {
     namespace 'com.example.readfi'
     compileSdk 32
+    buildTypes {
+        release {
+            debuggable false
+            
+        }
+        debug {
+            debuggable true
+
+        }
+    }
     buildFeatures {
         viewBinding true
     }
