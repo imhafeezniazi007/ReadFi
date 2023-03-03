@@ -92,7 +92,7 @@
                 android:padding="2dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/confirm_button"
                 android:layout_width="70dp"
                 android:layout_height="30dp"
                 android:layout_gravity="end"

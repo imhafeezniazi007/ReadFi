@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 progressBar.dismiss();
-                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -98,13 +98,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.getString("isAdmin") != null){
                     progressBar.dismiss();
-                    Toast.makeText(LoginActivity.this, "You're logged in...", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, AdminPanelActivity.class));
                     finish();
                 }
                 else if (documentSnapshot.getString("isUser") != null){
                     progressBar.dismiss();
-                    Toast.makeText(LoginActivity.this, "You're logged in...", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     finish();
                 }
@@ -119,18 +117,5 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean validateInput (String username, String password){
-        if (TextUtils.isEmpty(username)) {
-            binding.edittextUsername.setError("Username cannot be empty");
-            return false;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            binding.edittextPassword.setError("Password cannot be empty");
-            return false;
-        }
-
-        return true;
-    }
 }
 

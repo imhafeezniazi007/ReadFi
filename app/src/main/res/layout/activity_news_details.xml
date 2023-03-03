@@ -55,7 +55,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Can't fetch the data..."
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:minLines="1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -75,7 +80,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/placeholder" />
