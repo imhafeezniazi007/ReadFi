@@ -103,8 +103,8 @@ public class HomeActivity extends AppCompatActivity {
                         {
                             progressDialog.dismiss();
 
-                            Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                            //progressDialog.dismiss();
+//                            Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+//                            //progressDialog.dismiss();
                         }
                         else{
 
