@@ -60,7 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
                 password = binding.edittextRegisterPassword.getText().toString();
                 verifyPassword = binding.edittextRegisterConfirmPassword.getText().toString();
 
-
                 mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
