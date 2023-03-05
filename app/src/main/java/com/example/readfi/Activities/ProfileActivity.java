@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
         myImageView.startAnimation(myFadeInAnimation);
 
-        binding.profileUsername.setText(Constants.F_Name);
+
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
