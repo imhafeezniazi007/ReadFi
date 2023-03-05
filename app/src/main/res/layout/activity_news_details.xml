@@ -7,6 +7,7 @@
     android:background="#000000"
     tools:context=".Activities.NewsDetailsActivity">
 
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="70dp"

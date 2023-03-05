@@ -20,6 +20,7 @@ public class NewsDetailsActivity extends AppCompatActivity {
         binding = ActivityNewsDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         String postText = getIntent().getStringExtra("postText");
         String postDescription = getIntent().getStringExtra("postDescription");
         String img = getIntent().getStringExtra("img");

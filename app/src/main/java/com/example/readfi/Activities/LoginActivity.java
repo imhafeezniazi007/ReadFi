@@ -8,8 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.readfi.R;
 import com.example.readfi.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        ImageView myImageView= binding.btc;
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        myImageView.startAnimation(myFadeInAnimation);
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +70,12 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        binding.btnGoogleauthentication.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        binding.btnGoogleauthentication.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
         binding.btnToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

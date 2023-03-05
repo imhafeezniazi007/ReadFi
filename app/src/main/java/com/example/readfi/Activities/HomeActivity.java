@@ -13,6 +13,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.readfi.Adapters.PostAdapter;
@@ -51,6 +54,10 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = binding.bottomNavigationView;
 
+        ImageView myImageView= binding.btc;
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        myImageView.startAnimation(myFadeInAnimation);
+
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -82,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.postsList.setAdapter(postAdapter);
 
         getPosts();
+        progressDialog.dismiss();
     }
 
     private void getPosts() {
@@ -93,11 +101,10 @@ public class HomeActivity extends AppCompatActivity {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null)
                         {
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                            }
+                            progressDialog.dismiss();
+
                             Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                            return;
+                            //progressDialog.dismiss();
                         }
                         else{
 
@@ -111,9 +118,8 @@ public class HomeActivity extends AppCompatActivity {
                                 }
 
                                 postAdapter.notifyDataSetChanged();
-                                if (progressDialog.isShowing()) {
-                                    progressDialog.dismiss();
-                                }
+                                progressDialog.dismiss();
+
                             }
                         }
                     }
