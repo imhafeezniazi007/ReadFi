@@ -31,6 +31,7 @@ import java.util.Objects;
 public class ProfileActivity extends AppCompatActivity {
 
     ActivityProfileBinding binding;
+    FirebaseAuth auth;
 //    GoogleSignInClient mGoogleSignInClient;
 
 
@@ -44,7 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
         myImageView.startAnimation(myFadeInAnimation);
 
-
+//        auth = FirebaseAuth.getInstance();
+//        binding.profileUsername.setText(auth.getCurrentUser().);
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

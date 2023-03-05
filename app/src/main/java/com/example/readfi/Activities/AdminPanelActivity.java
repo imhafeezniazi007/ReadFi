@@ -66,6 +66,14 @@ public class AdminPanelActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        binding.btnDeleteAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminPanelActivity.this, AdminPostsActivity.class));
+            }
+        });
+
         binding.btnAdminPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
