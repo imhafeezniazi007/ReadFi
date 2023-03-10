@@ -1,11 +1,7 @@
-package com.example.readfi.Adapters;
+package com.app.readfi.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.readfi.Activities.NewsDetailsActivity;
-import com.example.readfi.Models.Post;
-import com.example.readfi.R;
-import com.example.readfi.databinding.ItemPostBinding;
+import com.app.readfi.Activities.NewsDetailsActivity;
+import com.app.readfi.Models.Post;
+import com.app.readfi.R;
+import com.app.readfi.databinding.ItemPostBinding;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
     private Context context;

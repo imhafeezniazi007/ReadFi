@@ -1,16 +1,24 @@
-package com.example.readfi.Models;
+package com.app.readfi.Models;
 
-public class Post {
+public class AdminModel {
     private String postID;
     private String postText, postDescription, img;
 
-    public Post() {
+    public AdminModel() {
     }
 
-    public Post(String postID, String postText, String postDescription, String img) {
+    public AdminModel(String postID, String postText, String postDescription, String img) {
         this.postID = postID;
         this.postText = postText;
         this.postDescription = postDescription;
+        this.img = img;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -36,13 +44,5 @@ public class Post {
 
     public void setPostDescription(String postDescription) {
         this.postDescription = postDescription;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 }

@@ -1,23 +1,24 @@
 {
   "project_info": {
     "project_number": "659007631631",
+    "firebase_url": "https://readfi-de1e9-default-rtdb.firebaseio.com",
     "project_id": "readfi-de1e9",
     "storage_bucket": "readfi-de1e9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:659007631631:android:b6353380a3ff77de020e7a",
+        "mobilesdk_app_id": "1:659007631631:android:01e75a17d6c2beff020e7a",
         "android_client_info": {
-          "package_name": "com.example.readfi"
+          "package_name": "com.app.readfi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "659007631631-5vsr83pn15b63j3h7ltvpgqoqblvrt2j.apps.googleusercontent.com",
+          "client_id": "659007631631-vto7g9mb6vdpn36h18nms62j2keb9b0b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.readfi",
+            "package_name": "com.app.readfi",
             "certificate_hash": "887225003ea19aeae228b3ecf2e883a41508cc99"
           }
         },

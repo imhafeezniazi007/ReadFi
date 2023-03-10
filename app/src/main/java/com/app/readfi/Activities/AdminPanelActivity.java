@@ -1,26 +1,22 @@
-package com.example.readfi.Activities;
+package com.app.readfi.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.readfi.Models.Post;
-import com.example.readfi.databinding.ActivityAdminPanelBinding;
+import com.app.readfi.Models.Post;
+import com.app.readfi.databinding.ActivityAdminPanelBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;

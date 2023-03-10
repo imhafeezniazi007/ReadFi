@@ -1,4 +1,4 @@
-package com.example.readfi.Activities;
+package com.app.readfi.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.example.readfi.R;
-import com.example.readfi.databinding.ActivitySearchBinding;
+import com.app.readfi.R;
+import com.app.readfi.databinding.ActivitySearchBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SearchActivity extends AppCompatActivity {

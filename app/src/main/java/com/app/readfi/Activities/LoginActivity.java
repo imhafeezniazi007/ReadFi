@@ -1,4 +1,4 @@
-package com.example.readfi.Activities;
+package com.app.readfi.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,15 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.readfi.R;
-import com.example.readfi.databinding.ActivityLoginBinding;
+import com.app.readfi.R;
+import com.app.readfi.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;

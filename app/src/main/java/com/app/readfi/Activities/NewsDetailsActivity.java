@@ -1,14 +1,12 @@
-package com.example.readfi.Activities;
+package com.app.readfi.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
-import com.example.readfi.R;
-import com.example.readfi.databinding.ActivityHomeBinding;
-import com.example.readfi.databinding.ActivityNewsDetailsBinding;
+import com.app.readfi.R;
+import com.app.readfi.databinding.ActivityNewsDetailsBinding;
 
 public class NewsDetailsActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.readfi.Activities;
+package com.app.readfi.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import com.example.readfi.R;
-import com.example.readfi.databinding.ActivityProfileBinding;
+import com.app.readfi.R;
+import com.app.readfi.databinding.ActivityProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

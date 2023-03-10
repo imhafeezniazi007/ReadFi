@@ -1,4 +1,4 @@
-package com.example.readfi.Activities;
+package com.app.readfi.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +12,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.readfi.R;
-import com.example.readfi.databinding.ActivitySignUpBinding;
+import com.app.readfi.R;
+import com.app.readfi.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;

@@ -1,33 +1,21 @@
-package com.example.readfi.Activities;
+package com.app.readfi.Activities;
 
-import static com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.readfi.Adapters.PostAdapter;
-import com.example.readfi.Models.Post;
-import com.example.readfi.R;
-import com.example.readfi.databinding.ActivityHomeBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.android.material.navigation.NavigationBarView;
+import com.app.readfi.Adapters.AdminPostAdapter;
+import com.app.readfi.Models.Post;
+import com.app.readfi.R;
+import com.app.readfi.databinding.ActivityAdminPostsBinding;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -35,45 +23,24 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class AdminPostsActivity extends AppCompatActivity {
 
-    ActivityHomeBinding binding;
-    PostAdapter postAdapter;
+    ActivityAdminPostsBinding binding;
+    AdminPostAdapter adminPostAdapter;
     ArrayList<Post> posts;
     FirebaseFirestore firebaseFirestore;
     ProgressDialog progressDialog;
-    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        binding = ActivityAdminPostsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        bottomNavigationView = binding.bottomNavigationView;
 
         ImageView myImageView= binding.btc;
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
         myImageView.startAnimation(myFadeInAnimation);
-
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.search:
-                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                        break;
-                    case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        break;
-
-                    default:
-                }
-                return true;
-            }
-        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -84,12 +51,12 @@ public class HomeActivity extends AppCompatActivity {
         binding.postsList.setLayoutManager(new LinearLayoutManager(this));
         firebaseFirestore = FirebaseFirestore.getInstance();
         posts = new ArrayList<Post>();
-        postAdapter = new PostAdapter(HomeActivity.this, posts);
+        adminPostAdapter = new AdminPostAdapter(AdminPostsActivity.this, posts);
 
-        binding.postsList.setAdapter(postAdapter);
+        binding.postsList.setAdapter(adminPostAdapter);
 
         getPosts();
-        progressDialog.dismiss();
+
     }
 
     private void getPosts() {
@@ -103,13 +70,13 @@ public class HomeActivity extends AppCompatActivity {
                         {
                             progressDialog.dismiss();
 
-//                            Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//                            //progressDialog.dismiss();
+                            Toast.makeText(AdminPostsActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                            //progressDialog.dismiss();
                         }
                         else{
 
                             for (DocumentChange documentChange:
-                                 value.getDocumentChanges()) {
+                                    value.getDocumentChanges()) {
                                 if (documentChange.getType() == DocumentChange.Type.ADDED)
                                 {
                                     posts.add(documentChange
@@ -117,8 +84,9 @@ public class HomeActivity extends AppCompatActivity {
                                             .toObject(Post.class));
                                 }
 
-                                postAdapter.notifyDataSetChanged();
+                                adminPostAdapter.notifyDataSetChanged();
                                 progressDialog.dismiss();
+
 
                             }
                         }
@@ -126,5 +94,4 @@ public class HomeActivity extends AppCompatActivity {
                 });
 
     }
-
 }

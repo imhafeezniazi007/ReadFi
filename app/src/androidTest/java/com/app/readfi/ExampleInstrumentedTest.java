@@ -1,4 +1,4 @@
-package com.example.readfi;
+package com.app.readfi;
 
 import android.content.Context;
 
